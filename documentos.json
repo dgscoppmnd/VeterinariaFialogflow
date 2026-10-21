@@ -1,0 +1,58 @@
+{
+  "Factura.png": {
+    "texto": "CLÍNICA VETERINARIA PONTIA\nC/ Mayor 15, Madrid\nCIF: B-12345678\n\nFACTURA N2: FAC-2824-019\nFecha: 18/03/2024\n\nConsulta general 35,00 E\nVacuna polivalente 28,50 E\nDesparasitación interna 12,751\nantibiótico AMXx-508 19,90 E\n\nToral 96,15 E\n\nnétodo de pago: tarjeta\nFecha de vencimiento: 18/04/2024",
+    "campos_validados": {
+      "fechas_encontradas": [
+        "18/03/2024",
+        "18/04/2024"
+      ],
+      "importes_encontrados": [],
+      "codigos_encontrados": [
+        "FAC-2824"
+      ]
+    }
+  },
+  "Historial.png": {
+    "texto": "HISTORIAL CLÍNICO\nClínica Veterinaria PontIA\n\nPaciente: Nala (gata, 2 años)\nPropietario: Diego García\n(2 Historia: HIS-20847\n\nFecha: 10/01/2024\n\nNotivo: revisión anual\n\nDiagnóstico: sana\n\nTratamiento: ninguno\n\nFecha: 14/02/2024\n\nMotivo: vacunación\n\nCódigo vacuna: VAC-204\n\nFecha: 09/03/2024\nnotivo: otitis leve\n\nTratamiento: gotas óticas OTI-118",
+    "campos_validados": {
+      "fechas_encontradas": [
+        "10/01/2024",
+        "14/02/2024",
+        "09/03/2024"
+      ],
+      "importes_encontrados": [],
+      "codigos_encontrados": [
+        "HIS-20847",
+        "VAC-204",
+        "OTI-118"
+      ]
+    }
+  },
+  "Presupuesto.png": {
+    "texto": "PRESUPUESTO QUIRÚRGICO\nClínica Veterinaria PontIA\n\npaciente: Rocky (perro, 6 años)\n12 Presupuesto: PRE-5512\nFecha: 05/04/2024\n\nconcepro IMPORTE\nPreoperatorio (analítica) 45,08 E\nAnestesia general 80,00 E\nCirugía de esterilización 210,08 E\nnaterial quirúrgico QUI-338 25,50 E\nHedicación postoperatoria 18,75 E\n\nToral 379,25 E\n\nValidez del presupuesto: 30/04/2024",
+    "campos_validados": {
+      "fechas_encontradas": [
+        "05/04/2024",
+        "30/04/2024"
+      ],
+      "importes_encontrados": [],
+      "codigos_encontrados": [
+        "PRE-5512",
+        "QUI-338"
+      ]
+    }
+  },
+  "Receta.png": {
+    "texto": "CLÍNICA VETERINARIA PONTIA\nC/ Mayor 15, Madrid\n\nRECETA VETERINARIA\n\nFecha: 15/03/2024\nColegiado: VET-12345\n\nPaciente: Lucas (perro, 4 años)\n\nPropietario: Diego García\n\nMedicamento: AMXx-500 (amoxicilina 508 mg)\n\nDosis: 1 comprimido cada 12 horas durante 7 días.\nFecha de revisión: 22/03/2024\n\nFirma y sello",
+    "campos_validados": {
+      "fechas_encontradas": [
+        "15/03/2024",
+        "22/03/2024"
+      ],
+      "importes_encontrados": [],
+      "codigos_encontrados": [
+        "VET-12345"
+      ]
+    }
+  }
+}
