@@ -1,0 +1,7 @@
+{
+  "queryResult": {
+    "intent": { "displayName": "dar_datos_mascota" },
+    "parameters": { "dni_dueno": "12345678Z", "nombre_mascota": "Toby" },
+    "queryText": ""
+  }
+}
