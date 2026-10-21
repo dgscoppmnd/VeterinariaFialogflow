@@ -1,0 +1,92 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="drawio" version="21.0.0">
+  <diagram name="Arquitectura Veterinaria" id="vet-arch-001">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Usuario -->
+        <mxCell id="usuario" value="Usuario&#10;(voz)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="340" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Flecha habla -->
+        <mxCell id="flecha-habla" value="habla" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="usuario" target="dialogflow">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Dialogflow ES (contenedor) -->
+        <mxCell id="dialogflow" value="Dialogflow ES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=14;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="160" width="340" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- STT -->
+        <mxCell id="stt" value="STT nativo (audio)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="dialogflow">
+          <mxGeometry x="50" y="40" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Agente -->
+        <mxCell id="agente" value="Agente veterinaria-bot&#10;8 intenciones&#10;@dni (regex)&#10;@si_no&#10;contextos multi-turno" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="dialogflow">
+          <mxGeometry x="50" y="115" width="240" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- TTS -->
+        <mxCell id="tts" value="TTS nativo (SSML)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="dialogflow">
+          <mxGeometry x="50" y="235" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Flechas internas Dialogflow -->
+        <mxCell id="f-stt-agente" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="dialogflow" source="stt" target="agente">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f-agente-tts" value="POST JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="dialogflow" source="agente" target="tts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Flecha webhook -->
+        <mxCell id="flecha-webhook" value="webhook" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="dialogflow" target="fastapi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- FastAPI (contenedor) -->
+        <mxCell id="fastapi" value="FastAPI (ngrok)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="510" width="340" height="360" as="geometry" />
+        </mxCell>
+
+        <!-- /webhook -->
+        <mxCell id="endpoint" value="/webhook&#10;- valida DNI (regex)&#10;- lógica de cita&#10;- consulta LLM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="fastapi">
+          <mxGeometry x="50" y="40" width="240" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- documentos.json -->
+        <mxCell id="docsjson" value="documentos.json&#10;(generado por OCR)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="fastapi">
+          <mxGeometry x="50" y="150" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Ollama -->
+        <mxCell id="ollama" value="Ollama (llama3.2:3b)&#10;control alucinaciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="fastapi">
+          <mxGeometry x="50" y="245" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Flechas internas FastAPI -->
+        <mxCell id="f-endpoint-docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="fastapi" source="endpoint" target="docsjson">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f-docs-ollama" value="contexto" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="fastapi" source="docsjson" target="ollama">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Fase offline -->
+        <mxCell id="offline" value="Fase offline (1 vez)&#10;Tesseract OCR&#10;script_ocr.py&#10;→ documentos.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;align=left;spacingLeft=8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="600" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Flecha offline → documentos.json -->
+        <mxCell id="f-offline-docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;strokeColor=#9673a6;" edge="1" parent="1" source="offline" target="docsjson">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
